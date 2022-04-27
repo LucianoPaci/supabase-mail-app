@@ -9,6 +9,8 @@ import { Link, useNavigate } from 'react-router-dom'
 import { useAuth } from '../../contexts/Auth'
 import { TextField } from 'formik-mui'
 
+const StyledTextField = (props) => <TextField fullWidth {...props} />
+
 function Login() {
   const { signIn } = useAuth()
   const navigate = useNavigate()
@@ -17,17 +19,22 @@ function Login() {
     password: '',
   }
   const validationSchema = yup.object({
-    email: yup.string().required(),
-    password: yup.string().required(),
+    email: yup
+      .string('Enter your email')
+      .email('Enter a valid email')
+      .required('Email is required'),
+    password: yup
+      .string('Enter your password')
+      .min(6, 'Password should be of minimum 6 characters length')
+      .required('Password is required'),
   })
 
   async function handleSubmit(values, actions) {
-    console.log('🚀 ~ file: index.js ~ line 32 ~ handleSubmit ~ values', values)
     const { email, password } = values
     const { error } = await signIn({ email, password })
 
     if (error) {
-      alert(`Error while signing in ${JSON.stringify(error, null, 2)}`)
+      alert('Error while signing in')
     } else {
       navigate('/inbox')
     }
@@ -38,28 +45,28 @@ function Login() {
       <Card>
         <Formik
           initialValues={initialValues}
-          //   validationSchema={validationSchema}
+          validationSchema={validationSchema}
           onSubmit={async (values, actions) =>
             await handleSubmit(values, actions)
           }
         >
-          {({ values, isSubmitting }) => (
+          {({ isSubmitting }) => (
             <Form>
-              <Grid container>
-                <Grid item xs={12}>
+              <Grid container spacing={2}>
+                <Grid item xs={12} sx={{ margin: 2 }}>
                   <Field
                     name="email"
                     type="email"
                     label="Email"
-                    component={TextField}
+                    component={StyledTextField}
                   />
                   <ErrorMessage name="email" component={'div'} />
                 </Grid>
-                <Grid item xs={12}>
+                <Grid item xs={12} sx={{ margin: 2 }}>
                   <Field
                     name="password"
                     type="password"
-                    component={TextField}
+                    component={StyledTextField}
                     label="Password"
                   />
                   <ErrorMessage name="password" component={'div'} />
