@@ -1,3 +1,9 @@
+# Inspiration from
+
+* https://ruanmartinelli.com/posts/supabase-authentication-react
+* https://reactrouter.com/docs/en/v6/examples/auth
+* https://formik.org/docs/examples/with-material-ui
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
