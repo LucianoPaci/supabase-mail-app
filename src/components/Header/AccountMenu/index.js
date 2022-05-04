@@ -38,7 +38,7 @@ export default function AccountMenu({ onSignOut, user }) {
             aria-expanded={open ? 'true' : undefined}
           >
             <Avatar sx={{ width: 32, height: 32 }}>
-              {getInitials(user.email)}
+              {user ? getInitials(user?.email) : null}
             </Avatar>
           </IconButton>
         </Tooltip>

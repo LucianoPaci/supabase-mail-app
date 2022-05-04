@@ -52,7 +52,7 @@ export const Header = ({ toggleNavigation }) => {
             <IconButton>
               <AppsIcon />
             </IconButton>
-            <AccountMenu onSignOut={handleSignOut} user={user} />
+            {user && <AccountMenu onSignOut={handleSignOut} user={user} />}
           </Box>
         </Toolbar>
       </AppBar>
